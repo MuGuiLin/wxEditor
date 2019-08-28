@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>原UEditor(百度编辑器) 二次开发 (微信编辑器)</title>
+    <link rel="stylesheet" href="./muguilin/muditor.base.css">
+    <style>
+        .h1 {
+            text-align: center;
+            line-height: 80px;
+            color: #0091f2;
+        }
+
+        .editor-box {
+            margin: 50px auto;
+            width: 1040px;
+            height: 500px;
+        }
+
+        .editor-box .editor {
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .btn-box {
+            position: fixed;
+            top: 80px;
+            right: 80px;
+            box-sizing: border-box;
+            width: 200px;
+            height: 850px;
+            border: 1px solid gray;
+            overflow-y: scroll;
+        }
+
+        .btn-box button {
+            display: block;
+            margin: 10px;
+            width: 90%;
+            line-height: 32px;
+            font-size: 15px;
+            background: #0091f2;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+    <script src="./muguilin/jquery-3.4.0.min.js"></script>
+    <script src="./muguilin/cropper.min.js"></script>
+    <script src="./muguilin/muditor.config.js"></script>
+
+    <script src="./ueditor.config.js"></script>
+    <script src="./ueditor.all.js"></script>
+    <script src="./lang/zh-cn/zh-cn.js"></script>
+
+    <script src="./xiumi/xiumi-ue-dialog-v5.js"></script>
+
+</head>
+
+<body>
+    <h1 class="h1">原UEditor(百度编辑器) 二次开发 (微信编辑器)</h1>
+    <hr>
+
+    <section class="editor-box">
+        <script id="editor" class="editor" type="text/plain"></script>
+    </section>
+
+    <section id="btn-box" class="btn-box">
+        <button onclick="getAllHtml()">获得整个html的内容</button>
+        <button onclick="getContent()">获得内容带标签</button>
+        <button onclick="getContentTxt()">获得纯文本</button>
+        <button onclick="getPlainTxt()">获得带格式的纯文本</button>
+        <button onclick="MU.ExtractTextImage()">获得图片</button>
+
+        <button onclick="hasContent()">判断是否有内容</button>
+        <button onclick="setContent()">写入内容</button>
+        <button onclick="setContent(true)">追加内容</button>
+
+        <button onclick="setFocus()">使编辑器获得焦点</button>
+        <button onmousedown="isFocus(event)">编辑器是否获得焦点</button>
+        <button onmousedown="setblur(event)">编辑器失去焦点</button>
+
+        <button onclick="getText()">获得当前选中的文本</button>
+        <button onclick="insertHtml()">插入给定的内容</button>
+        <button onclick="setEnabled()" id="enable">可以编辑</button>
+        <button onclick="setDisabled()">不可编辑</button>
+
+        <button onclick="UE.getEditor('editor').setHide()">隐藏编辑器</button>
+        <button onclick="UE.getEditor('editor').setShow()">显示编辑器</button>
+        <button onclick="UE.getEditor('editor').setHeight(300)">设置高度为300</button>
+
+        <button onclick="getLocalData()">获取草稿箱内容</button>
+        <button onclick="clearLocalData()">清空草稿箱</button>
+
+        <button onclick="createEditor()">创建编辑器</button>
+        <button onclick="deleteEditor()">删除编辑器</button>
+
+        <button onclick="window.scrollTo(0, 0)">回到顶部</button>
+    </section>
+
+    <script type="text/javascript">
+        //实例化编辑器
+        //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+
+        //编辑器初始化
+        MU.ueditor = UE.getEditor('editor');
+
+        //监听是否全屏
+        MU.ueditor.addListener('beforefullscreenchange', function (event, isFullScreen) {
+            if (!isFullScreen) {
+                MU.setTimeout(function () {
+                    $('#editor .edui-editor-iframeholder').css('width', '100%');
+                }, 10);
+            }
+        });
+
+        //内容改变时自动保存
+        var iTems = 60;
+        MU.ueditor.addListener("contentChange", function (i) {
+            if (!$('#auto-save-time').attr('title')) $('#auto-save-time').attr('title', '正文内容被修改后，在1分钟后自动保存!');
+            if (60 == iTems) {
+                clearInterval($.SET__TIMEOUT);
+                $.SET__TIMEOUT = setInterval(function () {
+                    if (1 >= iTems) {
+                        clearInterval($.SET__TIMEOUT);
+                        $('#auto-save-time').text('已自动保存').fadeIn();
+                        MU.setTimeout(function () {
+                            $('#auto-save-time').fadeOut();
+                        }, 10000);
+                        iTems = 60;
+
+                        //在这里写保存的方法 $.ajax() 、 Axios() 等等
+                    } else {
+                        iTems--;
+                    };
+                    // console.log(iTems);
+                }, 1000);
+            };
+        });
+
+        //正文中图片裁切
+        $(document.body).on('click', '#selectTextImages img', function () {
+            MU.getImgBase64($(this).attr('src'), function (base64) {
+                alert(base64);
+                if (MU.AlertThis) MU.AlertThis.RemoveAlert();
+                $('#cropper-box').animate({ top: '-50%' }, '2000');
+                $('.mask').hide();
+            });
+        });
+
+        function isFocus(e) {
+            alert(UE.getEditor('editor').isFocus());
+            UE.dom.domUtils.preventDefault(e);
+        };
+
+        function setblur(e) {
+            UE.getEditor('editor').blur();
+            UE.dom.domUtils.preventDefault(e);
+        };
+
+        function insertHtml() {
+            var value = prompt('插入html代码', '');
+            UE.getEditor('editor').execCommand('insertHtml', value);
+        };
+
+        function createEditor() {
+            enableBtn();
+            UE.getEditor('editor');
+        };
+
+        function getAllHtml() {
+            alert(UE.getEditor('editor').getAllHtml())
+        }
+
+        function getContent() {
+            var arr = [];
+            arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+            arr.push("内容为：");
+            arr.push(UE.getEditor('editor').getContent());
+            alert(arr.join("\n"));
+        };
+
+        function getPlainTxt() {
+            var arr = [];
+            arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+            arr.push("内容为：");
+            arr.push(UE.getEditor('editor').getPlainTxt());
+            alert(arr.join('\n'));
+        };
+
+        function setContent(isAppendTo) {
+            var arr = [];
+            arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+            UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+            alert(arr.join("\n"));
+        };
+
+        function setDisabled() {
+            UE.getEditor('editor').setDisabled('fullscreen');
+            disableBtn("enable");
+        };
+
+        function setEnabled() {
+            UE.getEditor('editor').setEnabled();
+            enableBtn();
+        };
+
+        function getText() {
+            //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+            var range = UE.getEditor('editor').selection.getRange();
+            range.select();
+            var txt = UE.getEditor('editor').selection.getText();
+            alert(txt);
+        };
+
+        function getContentTxt() {
+            var arr = [];
+            arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+            arr.push("编辑器的纯文本内容为：");
+            arr.push(UE.getEditor('editor').getContentTxt());
+            alert(arr.join("\n"));
+        };
+
+        function hasContent() {
+            var arr = [];
+            arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+            arr.push("判断结果为：");
+            arr.push(UE.getEditor('editor').hasContents());
+            alert(arr.join("\n"));
+        };
+
+        function setFocus() {
+            UE.getEditor('editor').focus();
+        };
+
+        function deleteEditor() {
+            disableBtn();
+            UE.getEditor('editor').destroy();
+        };
+
+        function disableBtn(str) {
+            var div = document.getElementById('btn-box');
+            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+            for (var i = 0, btn; btn = btns[i++];) {
+                if (btn.id == str) {
+                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                } else {
+                    btn.setAttribute("disabled", "true");
+                }
+            }
+        };
+
+        function enableBtn() {
+            var div = document.getElementById('btn-box');
+            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+            for (var i = 0, btn; btn = btns[i++];) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            }
+        };
+
+        function getLocalData() {
+            alert(UE.getEditor('editor').execCommand("getlocaldata"));
+        };
+
+        function clearLocalData() {
+            UE.getEditor('editor').execCommand("clearlocaldata");
+            alert("已清空草稿箱")
+        };
+    </script>
+</body>
+
+</html>

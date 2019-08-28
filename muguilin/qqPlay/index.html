@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title></title>
+        <style>
+            *{margin: 0; padding: 0;}
+            audio{display:none; width: 0;height: 0;}
+            @keyframes move{ 0%{ transform: rotate(0deg);} 100%{transform: rotate(360deg);} }
+            .wrap{ position: relative; padding: 1px; border: 1px solid #ececec;  overflow: hidden;}
+            .wrap .play{position: relative; float: left; }
+            .wrap .play .play-i{ position: absolute; top: 50%; left: 50%; margin-top: -15px; margin-left: -15px;width: 30px; height: 30px; background: transparent url(../media/qqPlay/play.png) no-repeat 0 0; background-size: 30px; cursor: pointer; }
+            .wrap .play .photo{display: block; width: 62px; height: 62px; border: 1px solid #ececec; transition: all .3s; -webkit-transition: all .3s; }
+            .wrap .play .photo-r{border-radius: 50%; animation: move 3s infinite linear running; -webkit-animation: move 3s infinite linear running;}
+            .wrap .info{ padding: 10px 0 0 10px; overflow: hidden; }
+            .wrap .info .title{ font-size: 15px; color: #555; line-height: 26px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; }
+            .wrap .info .descr{ font-size: 14px; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; }
+            .wrap .icon{ position: absolute; right: 10px; bottom: 10px; width: 20px; height: 20px; background: transparent url(../media/qqPlay/icon.png) no-repeat 0 0; background-size: 20px auto;}
+        </style>
+    </head>
+    <body>
+        <section class="wrap">
+            <div class="play">
+                <img class="photo" src="../media/audio/logo.png" />
+                <i class="play-i"></i>
+            </div>
+            <div class="info">
+                <h4 class="title"></h4>
+                <p class="descr"></p>
+            </div>
+            <div class="icon"></div>
+        </section>
+    </body>
+    <script>
+        ;(function(global, factory){
+            "use strict";
+            if (typeof define === 'function' && define.amd) {
+                define(factory);
+            } else if (typeof exports === 'object') {
+                module.exports = factory();
+            } else {
+                global.play = factory();
+                play.on(play.$('.play'), 'click', function(){
+                    play.play();
+                });
+            };
+        } (typeof window !== "undefined" ? window : this, function () {
+            "use strict";
+            var Play = function() {
+                this.audio = null;
+                this.$ = function(o){
+                    return document.querySelector(o);
+                };
+                this.delAllSpace = function(o) {
+                    return o.replace(/\s+/g, '');
+                };
+                this.on = function(elem, type, back) {
+                    if (elem.addEventListener) {
+                        elem.addEventListener(type, back, false);
+                    } else if (elem.attachEvent) {
+                        elem.attachEvent('on' + type, back);
+                    } else {
+                        elem['on' + type] = back;
+                    }
+                };
+                this.hasClass = function (ele, cls) {
+                    return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+                };
+                this.addClass = function (ele, cls) {
+                    var ocs = this.delAllSpace(ele.className);
+                    if (!this.hasClass(ele, cls)) ele.className = ocs += ' ' + cls;
+                };
+                this.removeClass = function (ele, cls) {
+                    if (this.hasClass(ele, cls)) {
+                        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                        ele.className = ele.className.replace(reg, ' ');
+                    }
+                };
+                this.toggleClass = function (ele,cls) { 
+                    if(this.hasClass(ele,cls)) { 
+                        this.removeClass(ele, cls); 
+                    } else { 
+                        this.addClass(ele, cls); 
+                    } 
+                };
+                this.init();
+            };
+            Play.prototype = {
+                getPar: function (o) {
+                    var p = window.location.search.substring(1)
+                    try {
+                        var r = new RegExp("(^|&)" + o + "=([^&]*)(&|$)", "i"),
+                            r = p.match(r);
+                        if (r != null) return decodeURIComponent(r[2]) || unescape(r[2]);
+                        return null;
+                    } catch (e) {
+                        var obj = new Object(),
+                            par = p.split("&");
+                        for (var i = 0; i < par.length; i++) {
+                            var pos = par[i].indexOf('=');
+                            if (pos == -1) continue;
+                            var key = par[i].split('=')[0];
+                            var val = par[i].split('=')[1];
+                            obj[key] = decodeURIComponent(val) || unescape(val);
+                        }
+                        if (obj[o] != null) return obj[o];
+                        return null;
+                    }
+                },
+                addAudio: function (src) {
+                    if(!src) return false;
+                    var _this = this;
+                    _this.audio = document.createElement('audio');
+                    _this.audio.src = src;
+                    document.body.appendChild(_this.audio);
+                    _this.on(_this.audio, 'play', function() {
+                        _this.$('.play-i').style.backgroundPositionY = '-60px';
+                    });
+                    _this.on(_this.audio, 'pause', function() {
+                        _this.audio.load();
+                        _this.$('.play-i').style.backgroundPositionY = '0px';
+                    });
+                    _this.on(_this.audio, 'ended', function() {
+                        return false;
+                        _this.audio.load();
+                        _this.removeClass(_this.$('.photo'), 'photo-r');
+                        _this.$('.play-i').style.backgroundPositionY = '0px';
+                    });
+                },
+                getiFrame: function (ele){
+                    return false;
+                    var url = location.href.split("/"),
+                        iframe = top.document.getElementsByTagName("iframe") || window.parent.window.document.getElementsByTagName('iframe');
+                    for (var i = 0, len = iframe.length; i < len; i++) {
+                         var iframeUrl = iframe[i].src.split("/");
+                        if(url[url.length - 1] == iframeUrl[iframeUrl.length - 1] || ele.ownerDocument === iframe[i].contentWindow.document) {
+                            return iframe[i];
+                        }
+                    };
+                },
+                init: function () {
+                    var _this = this;
+                    _this.addAudio(_this.getPar('playurl'));
+                    _this.$('.title').innerText = _this.getPar('music_name');
+                    _this.$('.descr').innerText = _this.getPar('singer');
+                    _this.$('.photo').setAttribute('src', _this.getPar('albumurl') || '../media/audio/logo.png');
+                    _this.getiFrame(_this.$('.photo'));
+                },
+                play: function() {
+                    var src = this.audio.getAttribute('src');
+                    if ('null' == src || '' == src) return false;
+                    this.toggleClass(this.$('.photo'), 'photo-r');
+                    this.audio.paused ? this.audio.play() : this.audio.pause();
+                }
+            }
+            return new Play();
+        }));
+    </script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+    <head>
+        <title>iDitor全发布云</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <script src="../internal.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="music.css" />
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div id="tabHeads" class="tabhead">
+                <span tabSrc="qqmusic" class="focus" data-content-id="qqmusic">在线搜索<var id="lang_tab_insertV"></var></span>
+                <!-- <span tabSrc="upload" data-content-id="upload">本地上传<var id="lang_tab_uploadV"></var></span> -->
+            </div>
+            <div id="tabBodys" class="tabbody">
+                <div id="qqmusic" class="panel focus">
+                    <div class="searchBar">
+                        <input id="J_searchName" type="text" placeholder="歌名 / 作者" />
+                        <input type="button" class="searchBtn" id="J_searchBtn">
+                    </div>
+                    <div class="resultBar" id="J_resultBar">
+                        <div class="loading" style="display:none"></div>
+                        <div class="empty"><var id="lang_input_tips"></var></div>
+                    </div>
+                    <div id="J_preview"></div>
+                </div>
+
+                <div id="upload" class="panel">
+                    <div id="upload_left">
+                        <div id="queueList" class="queueList">
+                            <form enctype="multipart/form-data" method="post">
+                                <input type="file" id="music-file" accept="audio/mp3, audio/wma, audio/wav, audio/amr, audio/m4a" />
+                            </form>
+                            <div class="statusBar" id="head-btn" style="display: none;">
+                                <div class="progress" style="display: none;">
+                                    <span class="text">0%</span>
+                                    <span class="percentage" style="width: 0%;"></span>
+                                </div>
+                                <div class="info" id="music-size"></div>
+                                <div class="btns">
+                                    <button id="select-file" class="upload-btn">重新选择</button>
+                                </div>
+                            </div>
+                            <div id="dnd-area" class="placeholder">
+                                <div class="flashTip">
+                                    <button id="open-upload" class="upload-btn">选择音频</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </body>
+
+    <script src="../../third-party/jquery-1.10.2.min.js"></script>
+    <script src="../../muguilin/muditor.config.js"></script>
+    <script src="music.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

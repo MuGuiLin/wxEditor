@@ -1,0 +1,82 @@
+@charset "utf-8";
+@-webkit-keyframes progressmove{0%{background-position:0 0;}
+    100%{background-position:17px 0;}
+}
+@-moz-keyframes progressmove{0%{background-position:0 0;}
+    100%{background-position:17px 0;}
+}
+@keyframes progressmove{0%{background-position:0 0;}
+    100%{background-position:17px 0;}
+}
+::-webkit-scrollbar{width:6px; height: 6px; background-color: #f9f9f9; }
+::-webkit-scrollbar-thumb{border-radius:6px; background-color: #154972;}
+.wrapper{position:relative;margin:10px auto;width:626px;zoom:1;}
+.searchBar{padding:10px 0 6px;height:30px;text-align:center;}
+.searchBar #J_searchName{padding-left:4px;width:492px;height:26px;vertical-align: top; border: 1px solid #CCC; outline: none;border-radius:2px;-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;}
+.searchBar #J_searchName:focus {border-color: #66afe9;outline: 0;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);}
+.searchBtn:hover{background:#1960d3;}
+.searchBtn{width: 96px; height:30px;font-size:14px;background:#0091f2;color: white; border: none; cursor: pointer; outline: none; border-radius:2px; }
+.resultBar{overflow:hidden;margin:0 auto; margin-top: 4px; width:596px;border:1px solid #CCC;font-size: 14px;}
+.musci-list-table{width:100%;text-align:center;}
+.musci-list-table thead,tbody tr{display:table;width:100%;table-layout:fixed;}
+.musci-list-table thead tr{background:#00b7ee;color:#fff;}
+.musci-list-table tbody{display:block;overflow-y:scroll;height:210px;-webkit-overflow-scrolling:touch; font-size: 13px;}
+/* .musci-list-table tbody tr:nth-of-type(even){background:#efefef;} */
+.musci-list-table tbody tr{ border-bottom: 1px solid #e7e7eb;}
+.musci-list-table tbody td input{width: 18px; height: 18px; cursor: pointer;}
+.musci-list-table tbody td button.play{margin-top:4px;width: 24px; height: 24px; border: none; background: url(./images/play0.png) no-repeat; background-size: cover;outline: none; cursor: pointer;  }
+.musci-list-table tbody td button.play1{ background: url(./images/play1.gif) no-repeat; background-size: cover;}
+.musci-list-table th.w88{width: 88px;}
+.musci-list-table td.w60, .musci-list-table th.w60{width: 60px;}
+.musci-list-table th,td{height:38px;}
+.listPanel{overflow:hidden;}
+.panelon{display:block;}
+.paneloff{display:none;}
+.page{overflow:hidden;margin:4px auto;width:220px;}
+.pageon{float:right;margin-right:5px;width:24px;height:24px;border:none;background:0 0;color:#000;text-align:center;font-weight:700;line-height:24px;}
+.pageoff{float:right;margin-right:5px;width:24px;height:24px;border:1px solid #E7ECF0;background-color:#fff;color:#2D64B3;text-align:center;text-decoration:none;line-height:24px;cursor:pointer;}
+.m-box{width:460px;}
+.m-m{float:left;height:20px;line-height:20px;}
+.m-h{padding-left:46px;height:24px;border-bottom:1px solid #DAD8D8;background-color:#FAFAFA;color:#333;font-weight:700;font-size:12px;line-height:24px;}
+.m-l{float:left;width:40px;}
+.m-t{float:left;width:140px;}
+.m-s{float:left;width:110px;}
+.m-z{float:left;width:100px;}
+.m-try-t{float:left;width:60px;}
+.m-try{float:left;width:20px;height:20px;background:url(http://static.tieba.baidu.com/tb/editor/images/try_music.gif) no-repeat;}
+.m-trying{float:left;width:20px;height:20px;background:url(http://static.tieba.baidu.com/tb/editor/images/stop_music.gif) no-repeat;}
+.loading{margin:60px auto;width:95px;height:7px;background:url(http://static.tieba.baidu.com/tb/editor/images/loading.gif) no-repeat;font-size:7px;}
+.empty{margin:99px auto;padding:2px;width:306px;height:40px;color:#666;text-align:center;line-height:40px;}
+.tabbody{height:306px;}
+.tabbody .panel{position:absolute;display:none;overflow:hidden;width:0;height:0;background:#fff;}
+.tabbody .panel.focus{display:block;width:100%;height:306px;}
+.tabbody .panel table td{vertical-align:middle;}
+
+#videoType{width:65px;height:23px;border:1px solid #d7d7d7;line-height:22px;}
+#videoSearchBtn,#videoSearchReset{padding:0 5px;height:25px;border:1px solid #d7d7d7;background:#eee;line-height:25px;cursor:pointer;}
+#preview{position:relative;float:left;overflow:hidden;margin-left:10px;padding:0;width:420px;height:280px;background-color:#ddd;}
+#preview .previewMsg{position:absolute;top:0;margin:0;padding:0;width:100%;height:280px;background-color:#666;}
+#preview .previewMsg span{display:block;margin:125px auto 0 auto;color:#fff;text-align:center;font-size:18px;}
+#preview .previewVideo{position:absolute;top:0;margin:0;padding:0;width:100%;height:280px;}
+
+.tabbody #upload.panel{position:absolute!important;display:block;overflow:hidden;clip:rect(1px,1px,1px,1px);width:0;height:0;background:#fff;}
+.tabbody #upload.panel.focus{display:block;clip:auto;width:100%;height:306px;}
+#upload_alignment div{float:left;margin:9px;width:38px;height:36px;opacity:.5;cursor:pointer;filter:alpha(opacity=50);}
+#upload_alignment .focus{opacity:1;filter:alpha(opacity=100);}
+#upload_left{float:left;width:479px;}
+
+#upload .statusBar{position:relative;margin-left:10px;padding:0;height:45px;border-bottom:1px solid #dadada;vertical-align:middle;line-height:45px;}
+#upload .statusBar .progress{position:absolute;top:8px;display:none;margin:0 10px 0 0;width:364px;height:26px;border-radius: 2px;border:1px solid #0091f2;background:#fff;color:white;text-align:center;line-height:26px;}
+#upload .statusBar .progress span.percentage{position:absolute;top:0;left:0;width:0;height:100%;background:#0091f2;}
+#upload .statusBar .progress span.text{position:relative;z-index:10;}
+#upload .statusBar .info{display:inline-block;color:#666;font-size:14px;}
+#upload .statusBar .btns{position:absolute;top:7px;right:0;line-height:30px;}
+#upload .upload-btn{padding:4px 18px;border-color:transparent;background:#0091f2;color:#fff;border-radius: 2px; cursor: pointer; outline: none;}
+#upload .upload-btn:hover{background:#1960d3;}
+
+#upload .queueList{margin:0;}
+#upload .queueList form input{position:absolute;top:0;left:0;font-size:0;opacity:0;cursor:pointer;filter:alpha(opacity=0);}
+
+#upload .placeholder{position:relative;top:0;float:left;margin:10px;margin-right:0;padding-top:120px;width:97%;height:161px;border:2px dashed #e6e6e6;background:url(./images/image.png) center 70px no-repeat;color:#ccc;text-align:center;font-size:18px;}
+#upload .placeholder .flashTip{position:absolute;top:146px;width:100%;color:#666;text-align:center;}
+#upload .placeholder .flashTip .upload-btn{padding:8px 40px; font-size:16px;}

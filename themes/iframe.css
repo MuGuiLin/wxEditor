@@ -1,0 +1,36 @@
+/*可以在这里添加你自己的css*/
+html,body{ height: 100%; -webkit-overflow-scrolling : touch; overflow-x: auto;}
+
+/*滚动条样式*/
+::-webkit-scrollbar { width:6px; height: 6px; background-color: #f9f9f9;}
+::-webkit-scrollbar-thumb{  border-radius:6px; background-color: #154972;}
+
+/*IE滚动条样式*/
+body{overflow-y: scroll !important; scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-base-color: #154972;}
+
+/*宽度自适应*/
+table, video, img { max-width: 100%; height: auto;}
+
+iframe, object, embed{max-width: 100%;}
+
+
+.view{ word-break: break-all; height: auto; margin: 0px; margin-left:2px;}
+.vote_area { display: block; }
+.vote_iframe { background-color: transparent; border: 0 none; height: 100%; }
+
+@media (max-width:1025px) {
+	.view{ word-break: break-all; height: 100%; margin: 0px; margin-left:2px;}
+}
+.weapp-xiao-logo{display: inline-block; width: 14px; height: 20px; vertical-align: middle; background: url(default/images/xlogo.png) no-repeat; background-size: contain;}
+.weapp_text_link{color: #576b95; text-decoration: none; -webkit-tap-highlight-color: rgba(0,0,0,0);}
+.weapp_text_link:before { content: ''; ;margin-top: -2px; display: inline-block; width: 18px; height: 20px; line-height: 1; color: #888;font-size: 11px; vertical-align: middle; border-radius: 10px; background-size: 14px 14px; background-repeat: no-repeat; background-color: #f4f4f4; background-position: center; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAb1BMVEUAAAB4it11h9x2h9x2h9x2htx8j+R8i+B1h9x2h9x3h92Snv91htt2h9x1h9x4h9x1h9x1h9x2idx1h9t2h9t1htt1h9x1h9x1htx2h9x1h912h9x4h913iN17juOOjuN1iNx2h9t4h958i+B1htvejBiPAAAAJHRSTlMALPLcxKcVEOXXUgXtspU498sx69DPu5+Yc2JeRDwbCYuIRiGBtoolAAAA3ElEQVQoz62S1xKDIBBFWYiFYImm2DWF///G7DJEROOb58U79zi4O8iOo8zuCRfV8EdFgbYE49qFQs8ksJInajOA1wWfYvLcGSueU/oUGBtPpti09uNS68KTMcrQ5jce4kmN/HKn9XVPAo702JEdx9hTUrWUqVrI3KwUmM1NhIWMKdwiGvpGMWZOAj1PZuzAxHwhVSplrajoseBnbyDHAwvrtvKKhdqTtFBkL8wO5ijcsS3G1JMNvQ5mdW7fc0x0+ZcnlJlZiflAomdEyFaM7qeK2JahEjy5ZyU7jC/q/Rz/DgqEuAAAAABJRU5ErkJggg==);}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
