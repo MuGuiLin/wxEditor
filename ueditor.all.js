@@ -1,5 +1,5 @@
 /*!
- * iDitor编辑器 基于UEditor进行二次 优化、开发 MuGuiLin 2018.1.6
+ * iDitor编辑器 基于UEditor进行二次 优化、开发 MuGuiLin 2020.6.8
  * version: 1.4.3
  * build: Wed Aug 16 2018 13: 36: 30 GMT + 0800(中国标准时间)
  */
