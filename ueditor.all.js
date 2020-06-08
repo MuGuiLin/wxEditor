@@ -16913,11 +16913,23 @@
 				},
 				hideCover: function() {
 					this.cover.style.display = 'none';
+					/*
+					* 修复图片编辑工具栏不隐藏问题！
+					* 穆贵林
+					* 2020-03-05 13：20：32
+					* 原来没有：是新添加的,
+					*/
+					setTimeout(() => {
+						var dom = document.querySelector('.edui-anchor-topleft');
+						dom.style = dom.style.cssText + 'display: none;';
+					}, 360);
 				},
 				showCover: function() {
 					var me = this,
 						editorPos = domUtils.getXY(me.editor.ui.getDom()),
 						iframePos = domUtils.getXY(me.editor.iframe);
+					var dom = document.querySelector('.edui-anchor-topleft');
+						dom.style = dom.style.cssText + 'display: block;';
 					domUtils.setStyles(me.cover, {
 						'position': 'absolute',
 						'top': iframePos.y - editorPos.y + 'px',
@@ -16961,7 +16973,14 @@
 						'width': target.width + 'px',
 						'height': target.height + 'px',
 						'left': iframePos.x + imgPos.x - me.editor.document.body.scrollLeft - editorPos.x - parseInt(resizer.style.borderLeftWidth) + 2 + 'px',
-						'top': iframePos.y + imgPos.y - me.editor.document.body.scrollTop - editorPos.y - parseInt(resizer.style.borderTopWidth) + 'px'
+
+						/*
+						* 修复点击图片编辑框错位！
+						* 穆贵林
+						* 2020-03-05 11：52：56
+						*/
+						// 'top': iframePos.y + imgPos.y - me.editor.document.body.scrollTop - editorPos.y - parseInt(resizer.style.borderTopWidth) + 'px'
+						'top': iframePos.y + imgPos.y - (me.editor.document.documentElement.scrollTop || me.editor.document.body.scrollTop) - editorPos.y - parseInt(resizer.style.borderTopWidth) + 'px'
 					});
 				}
 			}
