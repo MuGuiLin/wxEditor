@@ -16763,6 +16763,7 @@
 
 					cover.id = me.editor.ui.id + '_imagescale_cover';
 					cover.style.cssText = 'position:absolute;display:none;z-index:' + (me.editor.options.zIndex) + ';filter:alpha(opacity=0); opacity:0;background:#CCC;';
+					me.coverId = cover.id;
 					domUtils.on(cover, 'mousedown click', function(event) {
 						var ev = event || window.event;
 							ev.stopPropagation();
@@ -16916,9 +16917,14 @@
 					/*
 					* 修复图片编辑工具栏不隐藏问题！
 					* 穆贵林
-					* 2020-03-05 13：20：32
+					* 2020-06-08 18：20：32
 					* 原来没有：是新添加的,
 					*/
+
+					//修复 点击图片以后进入图片编辑状态，然后再点击其他有文字的地方，不能获得焦点问。
+					var cover = document.querySelector('#'+ this.coverId);
+					cover.style = cover.style.cssText + 'z-index: -1;';
+
 					setTimeout(() => {
 						var dom = document.querySelector('.edui-anchor-topleft');
 						dom.style = dom.style.cssText + 'display: none;';
