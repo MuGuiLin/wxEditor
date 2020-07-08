@@ -156,8 +156,8 @@ $.support.cors = true;
         };
 
         $.extend({
-            QD__NET__: '',  //global.location.host,  //前端API域名
-            HD__NET__: '',  //global.location.host,  //后端API域名
+            QD__NET__: '',  //global.location.host,  //前端API域名 (用于 让开发，测试，生产3个环境自动识别当前点击上传图片地址域名所改【注：这是修改编辑器自带的上传哦】)
+            HD__NET__: '',  //global.location.host,  //后端API域名 （用于图裁切等,自定义上传功能【注：不是编辑器自带的上传功能哦】）
 
             md5: function (string) {
                 var x = Array();
