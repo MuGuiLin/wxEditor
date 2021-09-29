@@ -1,175 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>iDitor全发布云</title>
-		<script type="text/javascript" src="../internal.js"></script>
-		<style type="text/css">
-			* { 
-				margin: 0; padding: 0; color: #838383; 
-			}
-			table { 
-				font-size: 14px; margin: 10px; line-height: 56px; text-align: center;
-			}
-			.c-red { 
-				text-align: left; color: red; 
-			}
-			.input {
-				margin:16px 5px; padding: 4px; width: 532px; height: 26px; outline: none; background: none; border: 1px solid #e7e7eb;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>公众号文章链接</title>
+	<script type="text/javascript" src="../internal.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			color: #838383;
+		}
 
-	<body>
-		<table>
-			<tr>
-				<td><label for="title"> <var id="lang_input_text" /></var></label></td>
-				<td><input class="input" id="title" type="text" disabled="true" placeholder="请输入链接标题" /></td>
-			</tr>
-			<tr>
-				<td><label for="href"> <var id="lang_input_url"></var></label></td>
-				<td><input class="input" id="href" type="url" placeholder="请输入公众号文章链接" /></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<p class="c-red" id="message"></p>
-				</td>
-			</tr>
-		</table>
-	</body>
+		table {
+			font-size: 14px;
+			margin: 10px;
+			line-height: 56px;
+			text-align: center;
+		}
 
-	<script src="../../third-party/jquery-1.10.2.min.js"></script>
-	<script src="../../muguilin/muditor.config.js"></script>
+		.c-red {
+			text-align: left;
+			color: red;
+		}
 
-	<script type="text/javascript">
-		;(function(global) {
-			"use strict";
+		.input {
+			margin: 16px 5px;
+			padding: 4px;
+			width: 532px;
+			height: 26px;
+			outline: none;
+			background: none;
+			border: 1px solid #e7e7eb;
+		}
+	</style>
+</head>
 
-			var Link = function() {
-				this.range = editor.selection.getRange();
-				this.link = this.range.collapsed ? editor.queryCommandValue("link") : editor.selection.getStart();
-				this.url = null;
-				this.orgText = null;
-				this.title = $G('title');
-				this.rangeLink = domUtils.findParentByTagName(this.range.getCommonAncestor(), 'a', true);
-				this.init();
-			};
+<body>
+	<table>
+		<tr>
+			<td><label for="title"> <var id="lang_input_text" /></var></label></td>
+			<td><input class="input" id="title" type="text" disabled="true" placeholder="请输入链接标题" /></td>
+		</tr>
+		<tr>
+			<td><label for="href"> <var id="lang_input_url"></var></label></td>
+			<td><input class="input" id="href" type="url" placeholder="请输入公众号文章链接" /></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p class="c-red" id="message"></p>
+			</td>
+		</tr>
+	</table>
+</body>
 
-			Link.prototype = {
-				init: function() {
-					this.link = domUtils.findParentByTagName(this.link, "a", true);
-					if (this.link) {
-						this.url = utils.html(this.link.getAttribute('_href') || this.link.getAttribute('href', 2));
-						if (this.rangeLink === this.link && !this.link.getElementsByTagName('img').length) {
-							this.title.removeAttribute('disabled');
-							this.orgText = this.title.value = this.link[browser.ie ? 'innerText' : 'textContent'];
-						} else {
-							this.title.setAttribute('disabled', 'true');
-							this.title.value = lang.validLink;
-						}
+<script src="../../third-party/jquery-1.10.2.min.js"></script>
+<script src="../../muguilin/muditor.config.js"></script>
+
+<script type="text/javascript">
+	; (function (global) {
+		"use strict";
+
+		var Link = function () {
+			this.range = editor.selection.getRange();
+			this.link = this.range.collapsed ? editor.queryCommandValue("link") : editor.selection.getStart();
+			this.url = null;
+			this.orgText = null;
+			this.title = $G('title');
+			this.rangeLink = domUtils.findParentByTagName(this.range.getCommonAncestor(), 'a', true);
+			this.init();
+		};
+
+		Link.prototype = {
+			init: function () {
+				this.link = domUtils.findParentByTagName(this.link, "a", true);
+				if (this.link) {
+					this.url = utils.html(this.link.getAttribute('_href') || this.link.getAttribute('href', 2));
+					if (this.rangeLink === this.link && !this.link.getElementsByTagName('img').length) {
+						this.title.removeAttribute('disabled');
+						this.orgText = this.title.value = this.link[browser.ie ? 'innerText' : 'textContent'];
 					} else {
-						if (this.range.collapsed) {
-							this.title.removeAttribute('disabled');
-							this.title.value = '';
-						} else {
-							this.title.setAttribute('disabled', 'true');
-							this.title.value = lang.validLink;
-						}
-					};
-					$G("href").value = this.url ? this.url : '';
-					$focus($G("title"));
-				},
-				checkWxUrl: function(href, arr) {
-					this.href = href.replace(/^\s+|\s+$/g, '');
-					for (var i = 0, ai; ai = arr[i++];) {
-						if (this.href.indexOf(ai) == 0) return true;
+						this.title.setAttribute('disabled', 'true');
+						this.title.value = lang.validLink;
 					}
-					return false;
-				},
-				enterInsert: function() {
-					var title = $('#title').val(),
-						link = $('#href').val();
-					if (!title) {
-						$G("message").innerHTML = '请输入链接标题！';
-						return false;
-					} else if (!link) {
-						$G("message").innerHTML = '请输入链接地址！';
-						return false;
+				} else {
+					if (this.range.collapsed) {
+						this.title.removeAttribute('disabled');
+						this.title.value = '';
 					} else {
-						this.href = $G('href').value.replace(/^\s+|\s+$/g, '');
-						if (this.href) {
-							if (!this.checkWxUrl(this.href, ["http", "/", "ftp://", '#'])) this.href = "http://" + this.href;
-							var obj = {
-								'href': this.href,
-								'_href': this.href,
-								'target': "_blank"
-							};
-							//修改链接内容的情况太特殊了，所以先做到这里了， todo:情况多的时候，做到command里
-							if (this.orgText && this.title.value != this.orgText) {
-								this.link[browser.ie ? 'innerText' : 'textContent'] = obj.textValue = this.title.value;
-								this.range.selectNode(this.link).select()
-							};
-							if (this.range.collapsed) obj.textValue = this.title.value;
-						};
-						$.ajax({
-							type: "POST",
-							url: MU.All__Url,
-							data: JSON.stringify({
-								jsonrpc: 2.0,
-								method: 'iditorArticle_checkweixinurl',
-								params: {
-									sign: $.md5('checkweixinurl' + MU.EncRypt()),
-									userId: MU.All__Uid,
-									title: title,
-									url: link
-								},
-								id: 0
-							}),
-							async: false,
-							dataType: "JSON",
-							success: function(o) {
-								if (1 == o.result.code) {
-									editor.setEnabled();
-									editor.execCommand('link', utils.clearEmptyAttrs(obj));
-									dialog.close();
-								} else {
-									alert(o.result.message);
-									return false;
-								}
-							}
-						});
-					};
-				}
-			};
-			var link = new Link();
-			dialog.onok = function() {
-				link.enterInsert();
-			};
-			$G('href').onkeydown = $G('title').onkeydown = function(evt) {
-				evt = evt || window.event;
-				if (evt.keyCode == 13) {
-					enterInsert();
-					return false;
+						this.title.setAttribute('disabled', 'true');
+						this.title.value = lang.validLink;
+					}
 				};
-			};
-			$G('title').onblur = function() {
-				if (!this.value) {
-					$G("message").innerHTML = '请输入链接标题!';
-				} else {
-					$G("message").innerHTML = "";
+				$G("href").value = this.url ? this.url : '';
+				$focus($G("title"));
+			},
+			checkWxUrl: function (href, arr) {
+				this.href = href.replace(/^\s+|\s+$/g, '');
+				for (var i = 0, ai; ai = arr[i++];) {
+					if (this.href.indexOf(ai) == 0) return true;
 				}
-			};
-			$G('href').onblur = function() {
-				if (!link.checkWxUrl(this.value, ["http", "/", "ftp://", '#'])) {
-					$G("message").innerHTML = lang.httpPrompt;
+				return false;
+			},
+			
+			enterInsert: function () {
+				var title = $('#title').val(),
+					link = $('#href').val();
+				if (!title) {
+					$G("message").innerHTML = '请输入链接标题！';
+					return false;
+				} else if (!link) {
+					$G("message").innerHTML = '请输入链接地址！';
+					return false;
 				} else {
-					$G("message").innerHTML = "";
-				}
+					this.href = $G('href').value.replace(/^\s+|\s+$/g, '');
+					if (this.href) {
+						if (!this.checkWxUrl(this.href, ["http", "/", "ftp://", '#'])) this.href = "http://" + this.href;
+						var obj = {
+							'href': this.href,
+							'_href': this.href,
+							'target': "_blank"
+						};
+						//修改链接内容的情况太特殊了，所以先做到这里了， todo:情况多的时候，做到command里
+						if (this.orgText && this.title.value != this.orgText) {
+							this.link[browser.ie ? 'innerText' : 'textContent'] = obj.textValue = this.title.value;
+							this.range.selectNode(this.link).select()
+						};
+						if (this.range.collapsed) obj.textValue = this.title.value;
+					};
+					$.ajax({
+						type: "POST",
+						url: MU.All__Url,
+						data: {
+							title: title,
+							url: link
+						},
+						async: false,
+						dataType: "JSON",
+						success: function (o) {
+							if (1 == o.result.code) {
+								editor.setEnabled();
+								editor.execCommand('link', utils.clearEmptyAttrs(obj));
+								dialog.close();
+							} else {
+								alert(o.result.message);
+								return false;
+							}
+						}
+					});
+				};
+			}
+		};
+		var link = new Link();
+		dialog.onok = function () {
+			link.enterInsert();
+		};
+		$G('href').onkeydown = $G('title').onkeydown = function (evt) {
+			evt = evt || window.event;
+			if (evt.keyCode == 13) {
+				enterInsert();
+				return false;
 			};
-		}(typeof window !== "undefined" ? window : this));
-	</script>
+		};
+		$G('title').onblur = function () {
+			if (!this.value) {
+				$G("message").innerHTML = '请输入链接标题!';
+			} else {
+				$G("message").innerHTML = "";
+			}
+		};
+		$G('href').onblur = function () {
+			if (!link.checkWxUrl(this.value, ["http", "/", "ftp://", '#'])) {
+				$G("message").innerHTML = lang.httpPrompt;
+			} else {
+				$G("message").innerHTML = "";
+			}
+		};
+	}(typeof window !== "undefined" ? window : this));
+</script>
 
 </html>

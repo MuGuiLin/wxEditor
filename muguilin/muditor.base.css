@@ -1,42 +1,6 @@
 @charset "utf-8";
 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p,blockquote, th, td {margin: 0; padding: 0;}
-
-*{ margin:0; padding:0;}
-
-ul, ol, li, img{ list-style:none; border:none; }
-li,button{-webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent;-moz-user-select: none; -o-user-select:none; -ms-user-select:none; -webkit-user-select:none; user-select:none;}
-
-table, th, td, tr{border-collapse:collapse; border-spacing:0; margin:0; padding:0;}
-object, embed, table, video, img { max-width: 100%; height: auto;}
-
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color:#C0C0C0;}
-
-textarea, input, button, a{text-decoration: none; resize:none; outline:none; border:none;}
-textarea, input[type='text'], input[type='tel'], input[type='number'], input[type='email'], input[type='password']{-webkit-appearance: none;}
-
-span, a, input, em, img{ vertical-align:middle;}
-
-a:link{color:#333;}
-a:visited{color:#333;}
-a:active{color:#333;}
-a:hover{color:#157efb; text-decoration:none;}
-
-html, body{ width: 100%; height: 100%; font-size:14px; color: #333; font-family:Arial,Tahoma,Verdana,"Microsoft YaHei","微软雅黑",Helvetica;}
-body{scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-base-color: #154972;}
-
-::-webkit-scrollbar{width:6px; height: 6px; background-color: #f9f9f9; }
-::-webkit-scrollbar-thumb{border-radius:6px; background-color: #154972;}
-
-.radio, .checkbox{position: relative; padding-left: 4px; cursor: pointer; }
-.radio input[type="radio"], .checkbox input[type="checkbox"] {font-size: 0; width: 0; height: 0;}
-.radio input[type="radio"]+i{ position: absolute; top: -2px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: white!important; border: 1px solid #0091f2;  }
-.radio input[type="radio"]:checked+i:after{content: ""; display: inline-block; position: absolute; left: 15%; top: 15%; width: 70%; height: 70%; border-radius: 50%; background: #0091f2;}
-.checkbox input[type="checkbox"]+i{ position: absolute; top: -2px; left: 0; width: 20px; height: 20px; background: white!important; border: 1px solid #0091f2;  }
-.checkbox input[type="checkbox"]:checked+i:after{content: ""; display: inline-block; position: absolute; left: 6px; top:2px; width: 5px; height: 10px; border: 3px solid #0091f2; border-left: none; border-top: none; -webkit-transform: rotate(45deg); transform: rotate(45deg);}
-    
-
-/*Alert弹窗*/
+/*自定义Alert弹窗*/
 .mask{position: fixed; top:0px; left: 0px; z-index:102; background-color: #000; opacity: 0.3; *filter: alpha(opacity=30); width: 100%; height: 100%;}
 .alert-mask { position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); display: -webkit-box; -webkit-box-pagk: center; -webkit-box-align: center; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center; z-index: 102;}
 .alert-mask .alert-box { position: absolute; box-sizing: border-box; width: 600px; padding:0 1em 1.8em 1em; background-color: white; border-radius: 3px; box-shadow: 0 1px 20px 0 #e4e8eb; -webkit-transition: all 0.2s cubic-bezier(.79,-0.54,.31,1.44); transition: all 0.2s cubic-bezier(.79,-0.54,.31,1.44);}
@@ -48,7 +12,6 @@ body{scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-bas
 
 .alert-mask .alert-box .alert-main { padding: 2em 0.4em; font-size: 18px; color: #333333; line-height: 180%; text-align: center; }
 .alert-mask .alert-box .alert-main li { line-height: 44px; position: relative; }
-.alert-mask .alert-box .alert-main li #tost_txt{ color: red;}
 .alert-mask .alert-box .alert-main li input{ width: 180px; height: 30px; border: 1px solid #E4E4E4; border-radius: 2px; font-size: 14px; padding-left: 6px;}
 .alert-mask .alert-box .alert-main li input:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
 .alert-mask .alert-box .alert-main li span{ display: inline-block; width: 60px; color: #565656; text-align: left; font-weight: 500;}
@@ -56,49 +19,11 @@ body{scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-bas
 .alert-mask .alert-box .alert-main li i{ display: inline-block; width: 102px; height: 31px; position: absolute; top: 7px; left: 377px; display: none; }
 
 .alert-mask .alert-box .alert-dom { width: 100%;}
-.alert-mask .alert-box .alert-dom .user-password{ padding-top: 10px; text-align: center; line-height: 18px; font-size: 16px;}
-.alert-mask .alert-box .alert-dom .user-password li{ line-height: 44px;}
-.alert-mask .alert-box .alert-dom .user-password a{ display: inline-block; width: 100px; height: 29px; margin-left: 8px; line-height: 30px; border: 1px solid #0091f2; border-radius: 2px; color: #0091f2; font-size: 16px; text-align: center;}
-.alert-mask .alert-box .alert-dom .user-password b{ display: inline-block;width: 80px; color: #565656;  text-align: left; font-weight: 500;}
-.alert-mask .alert-box .alert-dom .user-password input{ width: 250px; height: 30px; border: 1px solid #E4E4E4; border-radius: 2px; font-size: 12px; padding-left: 6px;}
-.alert-mask .alert-box .alert-dom .user-password input:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
-.alert-mask .alert-box .alert-dom .user-password .toast_txt{ margin-bottom: -20px; display: none; font-size: 14px;}
 
-.alert-mask .alert-box .alert-dom .trial-appinfo{ margin-top: 10px; padding: 10px; height: 200px; line-height: 18px; font-size: 16px; height: 200px; border-bottom: 1px solid #ececec; overflow-y: auto; -webkit-overflow-scrolling: touch;}
-.alert-mask .alert-box .alert-dom .trial-appinfo h4{ position: relative; padding: 18px 0;}
-.alert-mask .alert-box .alert-dom .trial-appinfo h4 hr{ position: absolute; top: 18px; display: inline-block; width: 100%; height: 0; border-bottom: 1px dotted #e8e8eb;}
-.alert-mask .alert-box .alert-dom .trial-appinfo h4 b{ position: absolute; top: 10px; display: inline-block; padding-right: 8px; font-size: 15px; background: white;}
-.alert-mask .alert-box .alert-dom .trial-appinfo h4 i{ margin-top: -2px;  width: 18px;  height: 18px; }
-.alert-mask .alert-box .alert-dom .trial-appinfo h4 i.i-wxwb-1{ background-position: -70px -604px;}
-.alert-mask .alert-box .alert-dom .trial-appinfo h4 i.i-wxwb-2{ background-position: -97px -604px;}
-.alert-mask .alert-box .alert-dom .trial-appinfo ul { padding-left: 20px;}
-.alert-mask .alert-box .alert-dom .trial-appinfo li .title{ display: inline-block; width: 130px; padding-top: 10px; vertical-align: top; color: #666; }
-.alert-mask .alert-box .alert-dom .trial-appinfo li .channel { display: inline-block; width: 380px; }
-.alert-mask .alert-box .alert-dom .trial-appinfo li .channel label { display: inline-block; cursor: pointer; padding: 10px 0; width: 180px;}
-.alert-mask .alert-box .alert-dom .trial-appinfo li .channel label input { display: inline-block; width: 18px; height: 18px;}
-.alert-mask .alert-box .alert-dom .toast_txt{ display: none; padding-top: 10px; font-size: 14px; text-align: center;}
-
-
-.alert-mask .alert-box .alert-dom .upload-media{ padding-top: 10px; padding-left: 20px; line-height: 18px; font-size: 16px;}
-.alert-mask .alert-box .alert-dom .upload-media li{ line-height: 50px;}
-.alert-mask .alert-box .alert-dom .upload-media a{ display: inline-block; width: 100px; height: 29px; margin-left: 8px; line-height: 30px; border: 1px solid #0091f2; border-radius: 2px; color: #0091f2; font-size: 16px; text-align: center;}
-.alert-mask .alert-box .alert-dom .upload-media b{ display: inline-block;width: 80px; color: #565656;  text-align: left; }
-.alert-mask .alert-box .alert-dom .upload-media b:first-child{ vertical-align: top; }
-.alert-mask .alert-box .alert-dom .upload-media span{ padding: 4px; font-weight: bold; color: #0091f2; transition: all .3s linear; }
-.alert-mask .alert-box .alert-dom .upload-media input{ width: 440px; height: 32px; border: 1px solid #E4E4E4; border-radius: 2px; font-size: 14px; padding-left: 6px;}
-.alert-mask .alert-box .alert-dom .upload-media input:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
-.alert-mask .alert-box .alert-dom .upload-media button{ position: relative; width: 100px; height: 30px;  border: 1px solid #0091f2; border-radius: 2px; color: #0091f2; background-color: white; cursor: pointer;}
-.alert-mask .alert-box .alert-dom .upload-media button:hover{ border-color: #1960d3; color: #1960d3;}
-.alert-mask .alert-box .alert-dom .upload-media button input{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 0px; opacity: 0; filter: alpha(opacity=0); cursor: pointer;}
-.alert-mask .alert-box .alert-dom .upload-media textarea{ margin-top: 6px; padding: 6px; width: 436px; height: 62px; border: 1px solid #E4E4E4; border-radius: 2px; font-size: 14px; }
-.alert-mask .alert-box .alert-dom .upload-media textarea:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
-.alert-mask .alert-box .alert-dom .upload-media .toast_txt{ margin-bottom: -20px; display: none;  text-align: center; font-size: 14px;}
-
-.alert-mask .alert-box .alert-dom .media-video-box { padding-top: 10px;}
-.alert-mask .alert-box .alert-dom .media-video-box video{ width: 100%; height: 320px; border-radius: 3px; background: black; border: 1px solid; }
-
+/* 小程序-弹窗样式 */
 .alert-mask .alert-box .alert-dom .app-applets{ padding-top: 10px; padding-left: 20px; line-height: 18px; font-size: 16px;}
-.alert-mask .alert-box .alert-dom .app-applets li{ line-height: 50px;}
+.alert-mask .alert-box .alert-dom .app-applets ul, li{margin: 0; padding: 0; list-style: none; }
+.alert-mask .alert-box .alert-dom .app-applets li{line-height: 50px;}
 .alert-mask .alert-box .alert-dom .app-applets a{ display: inline-block; width: 100px; height: 29px; margin-left: 8px; line-height: 30px; border: 1px solid #0091f2; border-radius: 2px; color: #0091f2; font-size: 16px; text-align: center;}
 .alert-mask .alert-box .alert-dom .app-applets b{ display: inline-block;width: 80px; color: #565656;  text-align: left; }
 .alert-mask .alert-box .alert-dom .app-applets b:first-child{ vertical-align: top; }
@@ -117,31 +42,15 @@ body{scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-bas
 .alert-mask .alert-box .alert-dom .app-applets .app-li .img-box i{ width: 200px; }
 .alert-mask .alert-box .alert-dom .app-applets .toast_txt{ margin-bottom: -20px; display: none; text-align: center; font-size: 14px;}
 
-
+/* 从正文中提取图片-弹窗样式 */
 .alert-mask .alert-box .alert-dom .title-img-tit{ font-size: 14px; text-align: left;}
 .alert-mask .alert-box .alert-dom .title-img-tit span{ font-size: 12px; color: #9a9a9a; line-height: 36px;}
 .alert-mask .alert-box .alert-dom .title-img-box{ width: 100%; height: 240px; text-align: left; overflow-y: auto; border: 1px solid #E0E0E0; -webkit-overflow-scrolling: touch;}
 .alert-mask .alert-box .alert-dom .title-img-box img{ margin: 4px; padding: 2px; border: 2px solid white; cursor: pointer;}
 .alert-mask .alert-box .alert-dom .title-img-box img:hover{ border: 2px solid #0091f2;}
-.alert-mask .alert-box .alert-dom .review_cont{ margin: 15px auto; margin-bottom: 0; padding: 10px; display: block; width: 530px; height: 140px; font-size: 16px; border: 1px solid #e4e4e4; border-radius: 3px;}
-.alert-mask .alert-box .alert-dom .collect-draft{ padding: 30px 30px 10px; text-align: center;}
-.alert-mask .alert-box .alert-dom .collect-draft input{ padding-left: 1%; width: 99%; height: 34px; font-size: 14px; border: 1px solid #e4e4e4; -webkit-appearance: none;}
-.alert-mask .alert-box .alert-dom .collect-draft input:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
-.alert-mask .alert-box .alert-dom .collect-draft img{ margin-bottom: 20px; display: none; }
-.alert-mask .alert-box .alert-dom .collect-draft p{ padding-top: 20px; display: none; font-size: 16px; color: red; text-align: center;}
 
-.alert-mask .alert-box .alert-dom .short-audio{ padding: 10px; text-align: center;}
-.alert-mask .alert-box .alert-dom .short-audio li{ margin-bottom: 20px; }
-.alert-mask .alert-box .alert-dom .short-audio p{ padding-top: 20px;  font-size: 18px; color: #333; text-align: center;}
 
-.alert-mask .alert-box .alert-dom .short-audio-to-video{ display: flex; padding: 30px 10px 0; text-align: center;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video div{ display: inline-block; text-align: left;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video .left-img{ flex: 1;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video .right-info{ width: 240px; padding-left: 20px ;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video img{ width: 300px; height: 166px; border: 1px solid #e4e4e4; border-radius: 3px;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video button{ width: 100px; height: 30px; font-size: 14px; background-color: #0091f2; color: white; border: none; border-radius: 2px; cursor: pointer; -webkit-appearance: normal;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video button:hover{ background-color: #1960d3;}
-.alert-mask .alert-box .alert-dom .short-audio-to-video p{ margin-top: 24px; color: #333; font-size: 16px; line-height: 32px; }
+/* 从外部粘贴文本时 将图片下载在本地 素材上传中，请稍候 */
 @keyframes progressMove{
 	0% { background-position-x: 40px;}
 	100% { background-position-x: 0;}
@@ -150,29 +59,12 @@ body{scrollbar-arrow-color: white; scrollbar-track-color: #f9f9f9; scrollbar-bas
 	0% { background-position-x: 40px;}
 	100% { background-position-x: 0;}
 }
-
 .alert-mask .alert-box .alert-dom .wxEditor-progress-main{padding: 10px; text-align: center;}
 .alert-mask .alert-box .alert-dom .wxEditor-progress-main p{ padding-top: 20px;  font-size: 18px; color: #333; text-align: center;}
 .alert-mask .alert-box .alert-dom .wxEditor-progress-main .wxEditor-progress-box{ position: relative; margin: auto; margin-top: 40px; width: 90%; height: 12px; border: 1px solid #0091f2; border-radius: 12px; background-color: white; overflow: hidden;}
 .alert-mask .alert-box .alert-dom .wxEditor-progress-main .wxEditor-progress-box .wxEditor-progress-bar{ content: ""; display: inline-block; position: absolute; left: 0; width: 0%;  height: 100%; background-size: 40px 40px; background-color: #0091f2; border-radius: 6px; background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
 background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
 transition: all 2s;  -webkit-transition: all 2s; animation: progressMove .5s linear infinite, widthMove 5s linear infinite; -webkit-animation: progressMove .5s linear infinite, widthMove 5s linear infinite; }
-
-
-.alert-mask .alert-box .alert-dom .material{ padding: 10px; text-align: center;}
-.alert-mask .alert-box .alert-dom .material li{ display: flex; flex-direction: row; line-height: 50px; }
-.alert-mask .alert-box .alert-dom .material li .material-title{ padding-left: 16px; width: 25%; text-align: left; font-size: 16px; font-weight: bold; color: #2a4658; }
-.alert-mask .alert-box .alert-dom .material li .material-content{ width: 75%;  }
-.alert-mask .alert-box .alert-dom .material li .material-content p{ font-size: 16px; color: #333; text-align: left;}
-.alert-mask .alert-box .alert-dom .material li .material-content p label{ display: inline-block; width: 196px; }
-.alert-mask .alert-box .alert-dom .material li .material-content p input{ width: 16px; height: 16px;}
-.alert-mask .alert-box .alert-dom .material li .material-content p .number{padding-left: 6px; width: 121px; height: 28px; border-radius: 2px; font-size: 14px; border: 1px solid #e4e4e4;  -webkit-appearance: none;}
-.alert-mask .alert-box .alert-dom .material li .material-content p button{ position: relative; left: 20px; width: 80px; height: 30px; border-radius: 2px; font-size: 14px;border: 1px solid #0091f2; color: #0091f2; background-color: white; cursor: pointer;}
-.alert-mask .alert-box .alert-dom .material li .material-content p b.red{ color: red;}
-.alert-mask .alert-box .alert-dom .material li .material-content p span{ color: gray;}
-.alert-mask .alert-box .alert-dom .material li .material-content p span.red{ color: red;}
-.alert-mask .alert-box .alert-dom .material li .material-content p .error{ display: none; color: red;}
-
 
 .alert-mask .alert-box .alert-footer { display: -webkit-flex; text-align: center; -webkit-justify-content: center; -webkit-align-items: center; padding: 2em 1em 0;}
 .alert-mask .alert-box .alert-footer > button { padding: 2px 8px; min-width: 100px; height: 30px; font-size: 14px; margin: 0px 1em; background-color: #0091f2; color: white; border: none; border-radius: 2px; cursor: pointer; -webkit-appearance: normal;}

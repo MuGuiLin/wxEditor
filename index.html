@@ -7,13 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>原UEditor(百度编辑器) 二次开发 (微信编辑器)</title>
-    <link rel="stylesheet" href="./muguilin/muditor.base.css">
+
+    <script src="./muguilin/jquery-3.4.0.min.js"></script>
+    <script src="./muguilin/cropper.min.js"></script>
+
+    <!-- 样式和配置 -->
+    <link href="./muguilin/muditor.base.css" rel="stylesheet" />
+    <script src="./muguilin/muditor.config.js"></script>
+
+    <!-- ueditor -->
+    <script src="./ueditor.config.js"></script>
+    <script src="./ueditor.all.js"></script>
+    <script src="./lang/zh-cn/zh-cn.js"></script>
+
+    <!-- xiumi -->
+    <script src="./xiumi/xiumi-ue-dialog-v5.js"></script>
+
     <style>
         .h1 {
             text-align: center;
             line-height: 80px;
             color: #0091f2;
         }
+
         .h3 {
             text-align: center;
             line-height: 40px;
@@ -38,8 +54,10 @@
             box-sizing: border-box;
             width: 200px;
             height: 850px;
+            border-radius: 4px;
             border: 1px solid gray;
             overflow-y: scroll;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .btn-box button {
@@ -51,19 +69,9 @@
             background: #0091f2;
             color: white;
             cursor: pointer;
+            border: none;
         }
     </style>
-
-    <script src="./muguilin/jquery-3.4.0.min.js"></script>
-    <script src="./muguilin/cropper.min.js"></script>
-    <script src="./muguilin/muditor.config.js"></script>
-
-    <script src="./ueditor.config.js"></script>
-    <script src="./ueditor.all.js"></script>
-    <script src="./lang/zh-cn/zh-cn.js"></script>
-
-    <script src="./xiumi/xiumi-ue-dialog-v5.js"></script>
-
 </head>
 
 <body>
@@ -80,7 +88,7 @@
         <button onclick="getContent()">获得内容带标签</button>
         <button onclick="getContentTxt()">获得纯文本</button>
         <button onclick="getPlainTxt()">获得带格式的纯文本</button>
-        <button onclick="MU.ExtractTextImage()">获得图片</button>
+        <button onclick="MU.ExtractTextImage()">获取正文中的图片</button>
 
         <button onclick="hasContent()">判断是否有内容</button>
         <button onclick="setContent()">写入内容</button>
