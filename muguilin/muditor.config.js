@@ -94,12 +94,12 @@ $.support.cors = true;
 
         $.extend({
             /**
-             * 前端API域名 (用于 让开发，测试，生产3个环境自动识别当前点击上传图片地址域名所改【注：这是修改编辑器自带的上传哦】)
+             * 前端API域名常量，一般使用默认即可
             */
             QD__NET__: '',  // 默认：location.host, 
 
             /**
-             * 后端API域名 （用于图裁切等,自定义上传功能【注：不是编辑器自带的上传功能哦】）
+             * 后端API域名常量，必需要和后端联调 （用于图裁切等,自定义上传功能，【除本地图片和本地视频上传以外的如：音频上传、图片裁切上传】）
             */
             HD__NET__: '',  // 默认：location.host,  
         });
@@ -110,15 +110,15 @@ $.support.cors = true;
              */
             this.All__Url = $.HD__NET__ + "/index.php/api/index";
 
+            // 小程序图版上传常量
             this.Upload__Image__Url = $.HD__NET__ + "/index.php/upload/images";
 
-            // 获取编辑器中的图片 API
+            // 从正文中提取图片裁切上传常量
             this.Upload__Cover__Url = $.HD__NET__ + "/index.php/upload/cover";
 
-            // 本地音频道上传
+            // 本地音频道上传常量（原UEditor没有的）
             this.Upload__Music__Url = $.HD__NET__ + "/index.php/upload/music";
 
-            this.Upload__Video__Url = $.HD__NET__ + "/index.php/upload/video";
 
             this.isiPhone = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent || global.navigator.userAgent);
 
@@ -292,12 +292,12 @@ $.support.cors = true;
             //图文粘贴进度
             MoveOnSpeedBar: function (w, s) {
                 var $bar = $('#wxEditor-progress-bar');
-                clearTimeout($.SET__TIMEOUT);
-                $.SET__TIMEOUT = MU.setTimeout(function () {
+                clearTimeout(win_time);
+                win_time = MU.setTimeout(function () {
                     if (100 > $bar.width()) {
                         $bar.width(w + '%');
                     } else {
-                        clearTimeout($.SET__TIMEOUT);
+                        clearTimeout(win_time);
                     };
                 }, s);
             },

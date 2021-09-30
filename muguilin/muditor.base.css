@@ -34,8 +34,8 @@
 .alert-mask .alert-box .alert-dom .app-applets input:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
 .alert-mask .alert-box .alert-dom .app-applets textarea{ margin-top: 6px; padding: 6px; width: 436px; height: 62px; border: 1px solid #E4E4E4; border-radius: 2px; font-size: 14px; }
 .alert-mask .alert-box .alert-dom .app-applets textarea:focus{ border-color:#0091f2; outline:0; box-shadow: 0px 0px 2px 0px #0091F2;}
-.alert-mask .alert-box .alert-dom .app-applets .is-show { margin-right: 80px; cursor: pointer;}
-.alert-mask .alert-box .alert-dom .app-applets .is-show input { display: inline-block; width: 16px; height: 16px; border: 1px solid #e8e8eb;}
+.alert-mask .alert-box .alert-dom .app-applets .is-show { margin-right: 78px; cursor: pointer;}
+.alert-mask .alert-box .alert-dom .app-applets .is-show input { display: inline-block; width: 16px; height: 16px; border: 1px solid #e8e8eb; vertical-align: text-bottom;}
 .alert-mask .alert-box .alert-dom .app-applets .is-show-2, .alert-mask .alert-box .alert-dom .app-applets .is-show-3{ display: none;}
 .alert-mask .alert-box .alert-dom .app-applets .app-li .img-box{ position: relative; margin-left: 80px; }
 .alert-mask .alert-box .alert-dom .app-applets .app-li .img-box img{ padding: 4px; width: 200px; display: none; border: 1px solid #E4E4E4; }

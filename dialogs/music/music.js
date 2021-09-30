@@ -6,15 +6,15 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        global.mupiao = factory();
+        global.music = factory();
     };
 
-    mupiao = new mupiao({
+    music = new music({
         type: 'qq'
     });
 
     dialog.onok = function () {
-        mupiao.exec();
+        music.exec();
     };
 
     dialog.oncancel = function () {
@@ -72,7 +72,7 @@
 
     var QQ = function (opts) {
         this.opts = {
-            name: opts.name || 'mupiao',
+            name: opts.name || 'music',
             page: 1,
             annal: 60,
             total: 72,
@@ -196,7 +196,7 @@
                 dom += '<tbody>';
                 for (let i = 0, len = o.length; i < len; i++) {
                     dom += '<tr>';
-                    dom += '<td class="w60"><input type="radio" class="radio" name="radio" onclick="window.mupiao.select(' + i + ')" /></td>';
+                    dom += '<td class="w60"><input type="radio" class="radio" name="radio" onclick="window.music.select(' + i + ')" /></td>';
                     if (d.list) {
                         dom += '<td>' + o[i].songname + '</td>';
                         dom += '<td>' + o[i].singername + '</td>';
@@ -207,7 +207,7 @@
                         dom += (o[i].singer && o[i].singer[0] && o[i].singer[0].name) ? o[i].singer[0].name : '未知'
                         dom += '</td>';
                     };
-                    dom += '<td class="w60"><button type="button" class="play" onclick="window.mupiao.play(this, ' + i + ')"></button></td>';
+                    dom += '<td class="w60"><button type="button" class="play" onclick="window.music.play(this, ' + i + ')"></button></td>';
                     dom += '</tr>';
                 };
                 dom += '</tbody>';
@@ -361,6 +361,7 @@
             oData.set("Music", oFile);
 
             window.setTimeout(function () {
+                // 自定义音频上传API
                 $.ajax({
                     type: "POST",
                     url: MU.Upload__Music__Url,

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>原UEditor(百度编辑器) 二次开发 (微信编辑器)</title>
+    <title>原UEditor(百度编辑器) 二次开发 (微信公众号图文编辑器)</title>
 
     <script src="./muguilin/jquery-3.4.0.min.js"></script>
     <script src="./muguilin/cropper.min.js"></script>
@@ -75,7 +75,7 @@
 </head>
 
 <body>
-    <h1 class="h1">原UEditor(百度编辑器) 二次开发 (微信编辑器)</h1>
+    <h1 class="h1">原UEditor(百度编辑器) 二次开发 (微信公众号图文编辑器)</h1>
     <h3 class="h3">温馨提示：代码要放在PHP服务环境（如：PhPStudy、WAMP等）下打开，部份功能才可以正常使用哦！</h3>
     <hr>
 
@@ -137,10 +137,10 @@
         MU.ueditor.addListener("contentChange", function (i) {
             if (!$('#auto-save-time').attr('title')) $('#auto-save-time').attr('title', '正文内容被修改后，在1分钟后自动保存!');
             if (60 == iTems) {
-                clearInterval($.SET__TIMEOUT);
-                $.SET__TIMEOUT = setInterval(function () {
+                clearInterval(win_time);
+                win_time = setInterval(function () {
                     if (1 >= iTems) {
-                        clearInterval($.SET__TIMEOUT);
+                        clearInterval(win_time);
                         $('#auto-save-time').text('已自动保存').fadeIn();
                         MU.setTimeout(function () {
                             $('#auto-save-time').fadeOut();
@@ -284,6 +284,14 @@
             UE.getEditor('editor').execCommand("clearlocaldata");
             alert("已清空草稿箱")
         };
+
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3ea0f7822148e1af78476d18abbb687a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
     </script>
 </body>
 

@@ -121,6 +121,17 @@ App.OpenLets = function () {
 
 //微信小程序
 UE.registerUI('applets-card-btn', function (editor, uiName) {
+    setTimeout(() => {
+        $(document.body).on('input keyup', 'input', function () {
+            $(this).val($(this).val().replace(/^\s+|\s+$/g, ""));
+        });
+
+        $(document.body).on('click', '#is-show-box .is-show', function () {
+            var $index = $('.is-show-' + $(this).index());
+            $('.app-li').not($index).slideUp();
+            $index.slideDown();
+        });
+    }, 1000);
     return new UE.ui.Button({
         name: 'applets-card',
         title: '小程序',
@@ -144,23 +155,12 @@ UE.registerUI('applets-card-btn', function (editor, uiName) {
                     callback: function () { App.OpenLets() }
                 }, {}]
             });
-
         }
     });
 });
 
-$(document.body).on('input keyup', 'input', function () {
-    $(this).val($(this).val().replace(/^\s+|\s+$/g, ""));
-});
-
-$(document.body).on('click', '#is-show-box .is-show', function () {
-    var $index = $('.is-show-' + $(this).index());
-    $('.app-li').not($index).slideUp();
-    $index.slideDown();
-});
-
 /**
- * 获取编辑器中的图片
+ * 提取正文中的图片
  */
 $(document.body).on('click', '#card-up-btn', function () {
     $.Cropper((2 / 1.6), {
