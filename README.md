@@ -11,7 +11,7 @@
 
 ### 实例地址：
 
-### <a target="_blank" href="https://muguilin.github.io/wxEditor/" >https://muguilin.github.io/wxEditor</a>
+### <a target="_blank" href="https://demo.muguilin.com/wxEditor" >https://demo.muguilin.com/wxEditor</a>
 
 
 
